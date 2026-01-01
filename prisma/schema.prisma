@@ -14,17 +14,81 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+  id           Int     @id @default(autoincrement())
+  email        String? @unique
+  telegramUser String? @unique
+  phone        String?
+  password     String?
+  role         Role    @default(user)
+
+  company   Company? @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId Int?     @unique
 }
 
-model Post {
+model Company {
+  id        Int    @id @default(autoincrement())
+  name      String
+  location  String
+  logo      String
+  instagram String
+  phone     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User?
+  employee Employee[]
+}
+
+model Employee {
   id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  authorId  Int
-  author    User    @relation(fields: [authorId], references: [id])
+  name      String
+  instagram String? @unique
+  whatsapp  String? @unique
+  telegram  String? @unique
+  viber     String? @unique
+  phone     String? @unique
+  photo     String?
+
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId Int
+
+  schedules ScheduleEmployee[]
+  services  Service[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ScheduleEmployee {
+  id        Int    @id @default(autoincrement())
+  dayOfWeek String
+  startTime String // format "HH:mm"
+  endTime   String // format "HH:mm"
+
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employeeId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Service {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  duration    Int // e.g. minutes
+  timeOffset  Int // e.g. break time / buffer in minutes
+  price       Int    @default(0)
+
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employeeId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  user
+  admin
 }

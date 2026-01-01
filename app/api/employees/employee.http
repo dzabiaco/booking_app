@@ -1,0 +1,23 @@
+POST http://localhost:3000/api/employees
+Content-Type: application/json
+Cookie: next-auth.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..cn2PcZb-4q_sTyP_.ZIQsSP3IrNCI2Y26VvwZASVMigBS4H7xvmsHBx81nvlOElhLJwP8S8y_2wH2q_1JG1BR-79IZc20qjka5jbdmrJWk1BbYWcTTLYk9K_-38yFKNMvv15DK6wn7TY3LpSSYiu3THsJk6T36FQxD4qaQGl6pZZ4kZQxSbLjMSs.xKAxfWa57MiMfk8FtqKn5A
+
+{
+  "name": "Burry Allen",
+  "phone": "+37360000000",
+  "instagram": "john",
+  "services": [
+    {
+      "name": "Haircut",
+      "description": "Basic haircut",
+      "duration": 30,
+      "timeOffset": 10
+    },
+    {
+      "name": "Beard trim",
+      "description": "Beard service",
+      "duration": 20,
+      "timeOffset": 5
+    }
+  ]
+}

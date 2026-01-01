@@ -1,0 +1,9 @@
+POST http://localhost:3000/api/services
+Content-Type: application/json
+
+{
+  "name": "Haircut",
+  "description": "Men haircut",
+  "duration": 45,
+  "timeOffset": 10
+}
