@@ -22,6 +22,8 @@ import {
 } from "@/components/ui/alert-dialog"
 import EmployeeServices from "@/components/employee/services/employee-services";
 import Service from "@/app/types/Service";
+import ScheduleType from "@/app/types/Schedule";
+import Schedule from "@/components/company/employees/schedule";
 
 
 interface InfoRowProps {
@@ -40,7 +42,7 @@ function InfoRow({ label, value, userId, onUpdate }: InfoRowProps) {
         setIsEditing(true);
     };
 
-    if (!value && !isEditing) return null;
+    if (value==null && !isEditing) return null;
 
     const onCancel = () => {
         setDraft(value ?? "");
@@ -165,7 +167,7 @@ export default function CompanyEmployees() {
             prev
                 ? {
                     ...prev,
-                    services: prev.services.filter(s => s.id !== serviceId),
+                    services: prev.services.filter((s:Service) => s.id !== serviceId),
                 }
                 : prev
         );
@@ -184,11 +186,22 @@ export default function CompanyEmployees() {
 
         setSelectedUser({
             ...selectedUser,
-            services: selectedUser.services.map(service =>
+            services: selectedUser.services.map((service) =>
                 service.id === updatedService.id ? updatedService : service
             ),
         });
     };
+
+    const handleSchedulesEdit = (updatedSchedule: ScheduleType) => {
+        if(!selectedUser) return;
+
+        setSelectedUser({
+            ...selectedUser,
+            schedules: selectedUser.schedules.map((schedule: ScheduleType) =>
+                schedule.id === updatedSchedule.id ? updatedSchedule : schedule
+            )
+        })
+    }
 
     return (
         <div className="mx-auto max-w-5xl pb-10">
@@ -297,10 +310,7 @@ export default function CompanyEmployees() {
 
                     <Card>
                         <CardContent className="pt-6">
-                            <h2 className="mb-4 text-lg font-semibold">Schedule</h2>
-                            <p className="text-sm text-muted-foreground">
-                                Schedule configuration will appear here.
-                            </p>
+                            {selectedUser && <Schedule employee={selectedUser} onScheduleEdit={handleSchedulesEdit}/>}
                         </CardContent>
                     </Card>
                 </div>

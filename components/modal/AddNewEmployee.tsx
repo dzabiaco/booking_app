@@ -23,6 +23,7 @@ export default function AddNewEmployee({ onCreated }: AddNewEmployeeProps) {
 
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
     const [instagram, setInstagram] = useState("");
     const [whatsapp, setWhatsapp] = useState("");
     const [telegram, setTelegram] = useState("");
@@ -54,7 +55,7 @@ export default function AddNewEmployee({ onCreated }: AddNewEmployeeProps) {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const payload = {name, phone, instagram,whatsapp, telegram, viber, photo, services};
+        const payload = {name, phone, instagram,whatsapp, telegram, viber, photo, services, email};
         console.log(payload);
 
         // Example POST request
@@ -120,6 +121,20 @@ export default function AddNewEmployee({ onCreated }: AddNewEmployeeProps) {
                             className="h-11"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
+                        />
+                    </div>
+
+                    {/* Email */}
+                    <div>
+                        <Label className="text-sm text-gray-600 mb-1 block">
+                            Email
+                        </Label>
+                        <Input
+                            type="email"
+                            placeholder="john.doe@mail.com"
+                            className="h-11"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
 

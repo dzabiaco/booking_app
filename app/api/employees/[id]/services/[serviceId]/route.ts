@@ -25,7 +25,7 @@ export async function GET (req: NextRequest, { params }: { params: Promise<{ id:
         const service = await prisma.service.findFirst({
             where: {
                 id: +serviceId,
-                employeeId: +id
+                userId: +id
             },
         });
 
@@ -65,7 +65,7 @@ export async function DELETE (req: NextRequest, { params }: { params: Promise<{ 
         const service = await prisma.service.findFirst({
             where: {
                 id: +serviceId,
-                employeeId: +id
+                userId: +id
             },
         });
 
@@ -114,7 +114,7 @@ export async function PATCH (req: NextRequest, { params }: { params: Promise<{ i
         const service = await prisma.service.findFirst({
             where: {
                 id: +serviceId,
-                employeeId: +id
+                userId: +id
             },
         });
 

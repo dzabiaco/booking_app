@@ -38,8 +38,21 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: "User has no company" }, { status: 400 });
     }
 
-    const employees = await prisma.employee.findMany({
+    const employees = await prisma.user.findMany({
         where: { companyId: user.companyId },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+            phone: true,
+            photo: true,
+            instagram: true,
+            telegram: true,
+            whatsapp: true,
+            viber: true,
+            companyId: true,
+        },
     });
 
     return NextResponse.json(employees);
@@ -77,6 +90,7 @@ export async function POST(req: NextRequest) {
             viber,
             phone,
             photo,
+            email,
             services = [],
         } = body;
 
@@ -87,7 +101,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const employee = await prisma.employee.create({
+        const employee = await prisma.user.create({
             data: {
                 name,
                 instagram,
@@ -96,6 +110,7 @@ export async function POST(req: NextRequest) {
                 viber,
                 phone,
                 photo,
+                email,
 
                 company: {
                     connect: { id: user.companyId },

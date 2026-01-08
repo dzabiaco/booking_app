@@ -23,10 +23,11 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
         return NextResponse.json({ error: "User has no company" }, { status: 400 });
     }
 
-    const employees = await prisma.employee.findFirst({
+    const employees = await prisma.user.findFirst({
         where: { id: +id },
         include: {
-            services: true
+            services: true,
+            schedules: true,
         }
     });
 
@@ -42,7 +43,7 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
 
     const { id } = await params;
 
-    const employees = await prisma.employee.delete({
+    const employees = await prisma.user.delete({
         where: { id: +id },
         include: {
             services: true
@@ -64,7 +65,7 @@ export async function PATCH(req: NextRequest,  { params }: { params: Promise<{ i
 
         const body = await req.json();
 
-        const employee = await prisma.employee.update({
+        const employee = await prisma.user.update({
             where: {id: +id},
             data: {
                 name: body.name,
@@ -87,7 +88,7 @@ export async function PATCH(req: NextRequest,  { params }: { params: Promise<{ i
     }
 }
 
-export async function POST (req: NextRequest) {
+export async function POST (req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
         const session = await getServerSession(authOptions);
 
@@ -96,6 +97,8 @@ export async function POST (req: NextRequest) {
         }
 
         const userId = Number(session.user.id);
+
+        const {id} = await params;
 
         const body = await req.json();
 
@@ -115,7 +118,7 @@ export async function POST (req: NextRequest) {
                 duration,
                 timeOffset: timeOffset || 0,
                 price: price || 0,
-                employeeId,
+                userId: +id,
             },
         });
 
@@ -123,6 +126,10 @@ export async function POST (req: NextRequest) {
     }
     catch (e) {
         console.log(e);
+        return NextResponse.json(
+            { message: "Failed to create employee" },
+            { status: 500 }
+        );
     }
 
 

@@ -15,10 +15,11 @@ export async function POST(req: NextRequest) {
         const body: {
             email: string;
             password: string;
+            name: string;
             role: 'user' | 'admin';
         } = await req.json();
 
-        const { email, password, role='user' } = body;
+        const { name, email, password, role='user' } = body;
 
         // Validate required fields
         if (!email || !password) {
@@ -40,6 +41,7 @@ export async function POST(req: NextRequest) {
 
         const savedUser = await prisma.user.create({
             data: {
+                name,
                 email,
                 password: hashedPassword,
                 role,

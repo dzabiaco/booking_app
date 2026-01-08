@@ -13,22 +13,22 @@ export async function GET(req: NextRequest) {
 
     const userId = Number(session.user.id);
 
-    const companyInfo = await prisma.company.findFirst({
+    const company = await prisma.company.findFirst({
         where: {
-            user: {
-                id: userId,
+            users: {
+                some: {
+                    id: userId,
+                },
             },
-        }
+        },
     });
-    return NextResponse.json(companyInfo);
+    return NextResponse.json(company);
 }
 
 export async function POST(req: NextRequest) {
     try {
 
         const session = await getServerSession(authOptions);
-
-        console.log("SESSION:", session);
 
         if (!session?.user?.id) {
             return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -59,16 +59,19 @@ export async function POST(req: NextRequest) {
             logo?: string;
             companyInstagram: string;
             companyPhone: string;
-            startTime: string;
-            endTime: string;
+            companyTiktok: string;
+            companyFacebook: string;
+            companyTelegram: string;
+            companyWhatsapp: string;
+            companyViber: string;
         } = await req.json();
 
-        const { companyName, companyLocation, companyInstagram, companyPhone, startTime, endTime } = body;
+        const { companyName, companyLocation, companyInstagram, companyPhone, companyTiktok, companyFacebook, companyTelegram,companyWhatsapp, companyViber} = body;
 
         console.log("BODY", body);
 
         // Validate required fields
-        if (!companyName || !companyLocation || !companyInstagram || !companyPhone || !startTime || !endTime) {
+        if (!companyName || !companyLocation || !companyInstagram || !companyPhone) {
             return NextResponse.json({ message: "All fields are required" }, { status: 400 });
         }
 
@@ -79,7 +82,12 @@ export async function POST(req: NextRequest) {
                 instagram: companyInstagram,
                 phone: companyPhone,
                 logo: "https://test.com/logo.png",
-                user: {
+                tiktok: companyTiktok,
+                facebook: companyFacebook,
+                telegram: companyTelegram,
+                whatsapp: companyWhatsapp,
+                viber: companyViber,
+                users: {
                     connect: { id: userId },
                 },
             },
@@ -120,8 +128,11 @@ export async function PATCH(req: NextRequest) {
             logo: string;
             companyInstagram: string;
             companyPhone: string;
-            startTime: string;
-            endTime: string;
+            companyTiktok: string;
+            companyFacebook: string;
+            companyTelegram: string;
+            companyWhatsapp: string;
+            companyViber: string;
         }> = await req.json();
 
         if (Object.keys(body).length === 0) {
@@ -141,6 +152,11 @@ export async function PATCH(req: NextRequest) {
                 instagram: body.companyInstagram,
                 phone: body.companyPhone,
                 logo: body.logo,
+                tiktok: body.companyTiktok,
+                facebook: body.companyFacebook,
+                telegram: body.companyTelegram,
+                whatsapp: body.companyWhatsapp,
+                viber: body.companyViber,
             },
         });
 

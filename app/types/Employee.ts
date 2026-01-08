@@ -1,4 +1,5 @@
 import Service from "@/app/types/Service";
+import Schedule from "@/app/types/Schedule";
 
 export interface Employee {
     id: number;
@@ -10,4 +11,5 @@ export interface Employee {
     phone?: string;
     photo?: string; // optional avatar image
     services: Service[];
+    schedules: Schedule[];
 }

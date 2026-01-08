@@ -12,16 +12,16 @@ export default async function CompanyInfo() {
         return redirect("/login");
     }
 
-    console.log("session", session);
-
     const company = await prisma.company.findFirst({
         where: {
-            user: {
-                id: Number(session.user.id),
+            users: {
+                some: {
+                    id: Number(session.user.id),
+                },
             },
         },
         include: {
-            user: true,
+            users: true, // optional, include all users if you need
         },
     });
 

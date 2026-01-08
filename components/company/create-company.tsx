@@ -19,16 +19,22 @@ export default function CreateCompany() {
         companyLocation: string;
         companyPhone: string;
         companyInstagram: string;
-        startTime: string;
-        endTime: string;
+        companyTiktok: string;
+        companyFacebook: string;
+        companyTelegram: string;
+        companyWhatsapp: string;
+        companyViber: string;
         companyLogo: File | null;
     }>({
         companyName: "",
         companyLocation: "",
         companyPhone: "",
         companyInstagram: "",
-        startTime: "",
-        endTime: "",
+        companyTiktok: "",
+        companyFacebook: "",
+        companyTelegram: "",
+        companyWhatsapp: "",
+        companyViber: "",
         companyLogo: null,
     });
 
@@ -183,45 +189,121 @@ export default function CreateCompany() {
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* Start Time */}
-                            <div className="space-y-2">
-                                <label
-                                    htmlFor="startTime"
-                                    className="text-sm font-medium text-slate-700"
-                                >
-                                    Start Time
-                                </label>
+                        <div className="space-y-2">
+                            <label
+                                htmlFor="companyTiktok"
+                                className="text-sm font-medium text-slate-700"
+                            >
+                                TikTok
+                            </label>
 
-                                <Input
-                                    id="startTime"
-                                    type="time"
-                                    value={formData.startTime}
-                                    onChange={handleChange}
-                                    className="h-11 w-full rounded-lg border border-slate-300
-                 px-3 focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                                />
-                            </div>
+                            <Input
+                                id="companyTiktok"
+                                type="text"
+                                placeholder="@yourcompany"
+                                value={formData.companyTiktok}
+                                onChange={handleChange}
+                                className="h-11 w-full rounded-lg border border-slate-300
+               px-3 focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                            />
 
-                            {/* End Time */}
-                            <div className="space-y-2">
-                                <label
-                                    htmlFor="endTime"
-                                    className="text-sm font-medium text-slate-700"
-                                >
-                                    End Time
-                                </label>
-
-                                <Input
-                                    id="endTime"
-                                    type="time"
-                                    value={formData.endTime}
-                                    onChange={handleChange}
-                                    className="h-11 w-full rounded-lg border border-slate-300
-                 px-3 focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                                />
-                            </div>
+                            <p className="text-xs text-slate-500">
+                                Share your Tiktok handle for customers to follow you
+                            </p>
                         </div>
+
+                        <div className="space-y-2">
+                            <label
+                                htmlFor="companyFacebook"
+                                className="text-sm font-medium text-slate-700"
+                            >
+                                Facebook
+                            </label>
+
+                            <Input
+                                id="companyFacebook"
+                                type="text"
+                                placeholder="@yourcompany"
+                                value={formData.companyFacebook}
+                                onChange={handleChange}
+                                className="h-11 w-full rounded-lg border border-slate-300
+               px-3 focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                            />
+
+                            <p className="text-xs text-slate-500">
+                                Share your Facebook handle for customers to follow you
+                            </p>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label
+                                htmlFor="companyWhatsapp"
+                                className="text-sm font-medium text-slate-700"
+                            >
+                                Whatsapp
+                            </label>
+
+                            <Input
+                                id="companyWhatsapp"
+                                type="text"
+                                placeholder="@yourcompany"
+                                value={formData.companyWhatsapp}
+                                onChange={handleChange}
+                                className="h-11 w-full rounded-lg border border-slate-300
+               px-3 focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                            />
+
+                            <p className="text-xs text-slate-500">
+                                Share your Whatsapp handle for customers to follow you
+                            </p>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label
+                                htmlFor="companyTelegram"
+                                className="text-sm font-medium text-slate-700"
+                            >
+                                Telegram
+                            </label>
+
+                            <Input
+                                id="companyTelegram"
+                                type="text"
+                                placeholder="@yourcompany"
+                                value={formData.companyTelegram}
+                                onChange={handleChange}
+                                className="h-11 w-full rounded-lg border border-slate-300
+               px-3 focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                            />
+
+                            <p className="text-xs text-slate-500">
+                                Share your Telegram handle for customers to follow you
+                            </p>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label
+                                htmlFor="companyViber"
+                                className="text-sm font-medium text-slate-700"
+                            >
+                                Viber
+                            </label>
+
+                            <Input
+                                id="companyViber"
+                                type="text"
+                                placeholder="@yourcompany"
+                                value={formData.companyViber}
+                                onChange={handleChange}
+                                className="h-11 w-full rounded-lg border border-slate-300
+               px-3 focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                            />
+
+                            <p className="text-xs text-slate-500">
+                                Share your Viber handle for customers to follow you
+                            </p>
+                        </div>
+
 
                         <div className="space-y-2">
                             <label

@@ -49,8 +49,10 @@ export async function POST(req: NextRequest) {
 
         const company = await prisma.company.findFirst({
             where: {
-                user: {
-                    id: userId,
+                users: {
+                    some: {
+                        id: userId,
+                    },
                 },
             },
             select: {
